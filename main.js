@@ -1,6 +1,9 @@
 /*
     Cargar comidas en memoria desde el JSON
 */
+/*
+    Cargar comidas en memoria desde el JSON
+*/
 fetch('./data/comidas-extended.json')          // Ruta al archivo JSON
   .then(response => response.json())  // Convertir la respuesta en JSON
   .then(data => {                     // Aquí tienes acceso al JSON en formato de objeto JS
@@ -17,7 +20,7 @@ let comidas = [];
 
 const container = document.getElementById('comidaContainer');
 
-function mostrarComidasConForEach(lista) {
+function mostrarComidasConForEach(lista = comidas) {
 
  container.innerHTML="" ; 
 
@@ -55,3 +58,32 @@ comidaNueva.addEventListener("submit", (event) => {
 
   event.target.reset()
 })
+
+const buscador = document.getElementById("buscador")
+const filtroCategoria = document.getElementById("filtroCategoria")
+const filtroProvincia = document.getElementById("filtroProvincia")
+
+function filtrar(){
+  const comidasFiltradas = comidas.filter( comida => { 
+    return comida.categoria.includes(filtroCategoria.value)
+        && comida.provincia.includes(filtroProvincia.value)
+  })
+
+  mostrarComidasConForEach(comidasFiltradas)
+}
+
+function buscar(){
+const texto = buscador.value.toLowerCase()
+
+const comidasFiltradas = comidas.filter(comida => {
+  return comida.nombre.toLowerCase().includes(texto)
+      || comida.provincia.toLowerCase().includes(texto)
+      || comida.categoria.toLowerCase().includes(texto)
+})
+mostrarComidasConForEach(comidasFiltradas)
+}
+
+filtroCategoria.addEventListener("change", filtrar)
+filtroProvincia.addEventListener("change", filtrar)
+buscador.addEventListener("input", buscar)
+
