@@ -1,9 +1,6 @@
 /*
     Cargar comidas en memoria desde el JSON
 */
-/*
-    Cargar comidas en memoria desde el JSON
-*/
 fetch('./data/comidas-extended.json')          // Ruta al archivo JSON
   .then(response => response.json())  // Convertir la respuesta en JSON
   .then(data => {                     // Aquí tienes acceso al JSON en formato de objeto JS
@@ -44,7 +41,7 @@ const comidaNueva = document.getElementById("agregarComida");
 
 comidaNueva.addEventListener("submit", (event) => {
   event.preventDefault();
-  //alert("Comida nueva recibida" + event.target.nombre.value);
+  
   let nuevaComida = {
    nombre: event.target.nombre.value, 
    categoria: event.target.categoria.value,  
@@ -86,4 +83,3 @@ mostrarComidasConForEach(comidasFiltradas)
 filtroCategoria.addEventListener("change", filtrar)
 filtroProvincia.addEventListener("change", filtrar)
 buscador.addEventListener("input", buscar)
-
